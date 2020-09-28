@@ -95,9 +95,9 @@
 
 window.addEventListener('DOMContentLoaded', () => {
   // Tabs
-  const tabs = document.querySelectorAll('.tabheader__item'),
-        tabsContent = document.querySelectorAll('.tabcontent'),
-        tabsParent = document.querySelector('.tabheader__items');
+  const tabs = document.querySelectorAll('.tabheader__item');
+  const tabsContent = document.querySelectorAll('.tabcontent');
+  const tabsParent = document.querySelector('.tabheader__items');
 
   function hideTabContent() {
     tabsContent.forEach(item => {
@@ -133,10 +133,10 @@ window.addEventListener('DOMContentLoaded', () => {
   const deadLine = '2020-09-30';
 
   function getTimeRemaining(endtime) {
-    const t = Date.parse(endtime) - Date.parse(new Date()),
-          days = Math.floor(t / (1000 * 60 * 60 * 24)),
-          hours = Math.floor(t / (1000 * 60 * 60) % 24),
-          minutes = Math.floor(t / (1000 / 60) % 60, seconds = Math.floor(t / 1000 % 60));
+    const t = Date.parse(endtime) - Date.parse(new Date());
+    const days = Math.floor(t / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(t / (1000 * 60 * 60) % 24);
+    const minutes = Math.floor(t / (1000 / 60) % 60, seconds = Math.floor(t / 1000 % 60));
     return {
       'total': t,
       'days': days,
@@ -155,12 +155,12 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function setClock(selector, endtime) {
-    const timer = document.querySelector(selector),
-          days = document.querySelector('#days'),
-          hours = document.querySelector('#hours'),
-          minutes = document.querySelector('#minutes'),
-          seconds = document.querySelector('#seconds'),
-          timeInterval = setInterval(updateClock, 1000);
+    const timer = document.querySelector(selector);
+    const days = timer.querySelector('#days');
+    const hours = timer.querySelector('#hours');
+    const minutes = timer.querySelector('#minutes');
+    const seconds = timer.querySelector('#seconds');
+    const timeInterval = setInterval(updateClock, 1000);
     updateClock();
 
     function updateClock() {
@@ -176,7 +176,24 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  setClock('.timer', deadLine);
+  setClock('.timer', deadLine); // Modal
+
+  const modal = document.querySelector('.modal');
+  const modalOpen = document.querySelectorAll('[data-modal]');
+  const modalClose = document.querySelector('[data-close]');
+
+  function showModal() {
+    modal.style.display = 'block';
+  }
+
+  function hideModal() {
+    modal.style.display = 'none';
+  }
+
+  modalOpen.forEach(item => {
+    item.addEventListener('click', showModal);
+  });
+  modalClose.addEventListener('click', hideModal);
 });
 
 /***/ })
